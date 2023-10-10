@@ -53,3 +53,29 @@ body {
   width: 100px;
   height: 20px;
 }
+
+/* CONNEXION PART */
+.Connexion {
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.Connexion h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.Connexion div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Connexion button {
+  height: 50px;
+  width: 200px;
+}
