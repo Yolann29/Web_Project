@@ -19,6 +19,7 @@ body {
   text-align: center;
 }
 
+/* CONTENT PART */
 
 .Content {
   height: 250px;
@@ -36,4 +37,19 @@ body {
 
 .Content button {
   height: 20%;
+}
+
+/* OFFER PART */
+.Offer {
+  width: 94%;
+  height: 92%;
+  background-color: yellow;
+  position: absolute;
+  top: 4%;
+  left: 3%;
+}
+
+.Offer button {
+  width: 100px;
+  height: 20px;
 }
