@@ -21,16 +21,18 @@ function App() {
 
   const handleApproved = () => {
     setApproved(true);
+    setRegister(false);
+    setConnected(false);
   }
 
   return (
     <div className="App">
-      {!connected && !register ? (
+      {!connected && !register && !approved ? (
         <Connexion connect={handleConnexion} connect2={handleInscription}/>
       ) : (
         <>
-          {register && !connected ? <Inscription /> : null}
-          {!register && connected ? <Connexion2 /> : null}
+          {register && !connected ? <Inscription onApproved={handleApproved}/> : null}
+          {!register && connected ? <Connexion2 onApproved={handleApproved}/> : null}
           {approved && (
             <>
               <Content title="Job 1" text="Ceci est la première annonce"/>

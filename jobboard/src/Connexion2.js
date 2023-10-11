@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function Connexion2() {
+function Connexion2(props) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -11,7 +11,12 @@ function Connexion2() {
             username,
             password
             })
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res);
+                if (res.status === 200) {
+                    props.onApproved();
+                }
+            })
             .catch(err => console.log(err));
     }
 

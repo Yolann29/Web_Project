@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function Inscription() {
+function Inscription(props) {
 
     const [surname, setSurname] = useState('');
     const [first_name, setFirst_Name] = useState('');
@@ -17,7 +17,12 @@ function Inscription() {
             password,
             email
             })
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res);
+                if (res.status === 200) {
+                    props.onApproved();
+                }
+            })
             .catch(err => console.log(err));
     }
 
