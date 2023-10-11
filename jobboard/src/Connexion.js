@@ -1,11 +1,12 @@
-function Connexion({connect, connect2}) {
+function Connexion({connect, connect2, connect3}) {
 
     return (
       <div className="Connexion">
             <h1>Welcome to Jobboard</h1>
             <div>
-                <button onClick={connect}>Se connecter</button>
-                <button onClick={connect2}>S'inscrire</button>
+                <button onClick={connect}>Sign in</button>
+                <button onClick={connect2}>User register</button>
+                <button onClick={connect3}>Admin register</button>
             </div>
       </div>
     );
