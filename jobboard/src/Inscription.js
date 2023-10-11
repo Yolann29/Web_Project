@@ -10,7 +10,7 @@ function Inscription() {
     const [email, setEmail] = useState('');
 
     const ajouterDonnee = () => {
-        axios.post('http://127.0.0.1:8000/utilisateur/', {
+        axios.post('http://127.0.0.1:8000/utilisateur/register', {
             surname,
             first_name,
             username,
@@ -22,12 +22,12 @@ function Inscription() {
     }
 
     return (
-        <div>
+        <div className="Inscription">
             <input type="text" placeholder="Surname" onChange={e => setSurname(e.target.value)} />
             <input type="text" placeholder="First Name" onChange={e => setFirst_Name(e.target.value)} />
             <input type="text" placeholder="Username" onChange={e => setUsername(e.target.value)} />
             <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-            <input type="email" placeholder="email" onChange={e => setEmail(e.target.value)} />
+            <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
             <button onClick={ajouterDonnee}>Ajouter</button>
         </div>
     )

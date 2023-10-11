@@ -79,3 +79,42 @@ body {
   height: 50px;
   width: 200px;
 }
+
+/* INSCRIPTION */
+.Inscription {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Inscription input {
+  width: 600px;
+  height: 50px;
+}
+
+.Inscription button {
+  width: 400px;
+  height: 50px;
+}
+
+.Connexion2 {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Connexion2 input {
+  width: 600px;
+  height: 50px;
+}
+
+.Connexion2 button {
+  width: 400px;
+  height: 50px;
+}

@@ -3,5 +3,6 @@ from . import views
 from django.middleware.csrf import get_token
 
 urlpatterns = [
-    path('', views.MaVue.as_view(), name="ma_vue"),
+    path('register', views.Inscription.as_view(), name="ma_vue"),
+    path('login', views.Connexion.as_view(), name='login'),
 ]

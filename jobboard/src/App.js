@@ -3,11 +3,13 @@ import './App.css';
 import Content from './Content.js';
 import Connexion from './Connexion.js';
 import Inscription from './Inscription';
+import Connexion2 from './Connexion2';
 
 function App() {
 
   const [connected, setConnected] = useState(false);
   const [register, setRegister] = useState(false);
+  const [approved, setApproved] = useState(false)
 
   const handleConnexion = () => {
     setConnected(true);
@@ -17,6 +19,10 @@ function App() {
     setRegister(true);
   }
 
+  const handleApproved = () => {
+    setApproved(true);
+  }
+
   return (
     <div className="App">
       {!connected && !register ? (
@@ -24,7 +30,8 @@ function App() {
       ) : (
         <>
           {register && !connected ? <Inscription /> : null}
-          {connected && (
+          {!register && connected ? <Connexion2 /> : null}
+          {approved && (
             <>
               <Content title="Job 1" text="Ceci est la première annonce"/>
               <Content title="Job 2" text="Ceci est la deuxième annonce"/>
