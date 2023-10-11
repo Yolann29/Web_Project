@@ -6,3 +6,8 @@ class cmp(models.Model):
     username = models.CharField(max_length=30)
     password = models.CharField()
     email = models.EmailField()
+
+
+
+
+
