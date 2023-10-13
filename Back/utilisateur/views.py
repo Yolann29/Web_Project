@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
 import json
-from .models import cmp
+from .models import cmp, advertisement, companies
 
 class Inscription(View):
     def post(self, request, *args, **kwargs):
@@ -21,12 +21,20 @@ class Connexion(View):
         corps_de_la_requete = json.loads(request.body.decode('utf-8'))
         username = corps_de_la_requete.get('username')
         password = corps_de_la_requete.get('password')
-
-        # Recherche dans votre table 'utilisateur'
         try:
             utilisateur = cmp.objects.get(username=username, password=password)
-            # Ici, vous pouvez faire quelque chose avec l'utilisateur authentifié.
-            # Notez que cette manière de faire n'est pas sécurisée car le mot de passe doit être stocké en clair.
-            return JsonResponse({'message': 'Connecté !'})
+            return JsonResponse({'message': 'Connecté !',
+                                 'username': utilisateur.username,
+                                 'permissions': utilisateur.permissions_id})
         except cmp.DoesNotExist:
             return JsonResponse({'message': 'Non connecté !'}, status=401)
+
+class NewOffer(View):
+    def post(self, request, *args, **kwargs):
+        corps_de_la_requete = json.loads(request.body.decode('utf-8'))
+        name = corps_de_la_requete.get('name')
+        description = corps_de_la_requete.get('description')
+        companie_existante = companies.objects.get(id=1)
+        new_advertisement = advertisement(title=name, description=description, companies=companie_existante)
+        new_advertisement.save()
+        return JsonResponse({'message': 'Reçu !'})

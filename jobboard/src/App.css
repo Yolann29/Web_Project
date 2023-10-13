@@ -118,3 +118,53 @@ body {
   width: 400px;
   height: 50px;
 }
+
+/* PANNEL */
+.Pannel {
+  display: flex;
+  width: 100vw;
+  height: 30px;
+  justify-content: right;
+  align-items: center;
+}
+
+.Pannel div {
+  height: 80%;
+  padding: 0px 20px;
+}
+
+.btn1 {
+  background-color: green;
+}
+
+.btn2 {
+  background-color: aqua;
+}
+
+.btn2:hover {
+  background-color: green;
+}
+
+/* NEWOFFER */
+.NewOffer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 94%;
+  height: 92%;
+  background-color: yellow;
+  position: absolute;
+  top: 8%;
+  right: 1%;
+}
+
+.NewOffer button {
+  width: 100px;
+  height: 20px;
+}
+
+.NewOffer input {
+  width: 600px;
+  height: 50px;
+}
