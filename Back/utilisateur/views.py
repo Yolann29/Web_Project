@@ -21,12 +21,11 @@ class Connexion(View):
         corps_de_la_requete = json.loads(request.body.decode('utf-8'))
         username = corps_de_la_requete.get('username')
         password = corps_de_la_requete.get('password')
-
-        # Recherche dans votre table 'utilisateur'
         try:
             utilisateur = cmp.objects.get(username=username, password=password)
-            # Ici, vous pouvez faire quelque chose avec l'utilisateur authentifié.
-            # Notez que cette manière de faire n'est pas sécurisée car le mot de passe doit être stocké en clair.
-            return JsonResponse({'message': 'Connecté !'})
+            return JsonResponse({'message': 'Connecté !',
+                                 'username': utilisateur.username,
+                                 'permissions': utilisateur.permissions_id})
         except cmp.DoesNotExist:
             return JsonResponse({'message': 'Non connecté !'}, status=401)
+

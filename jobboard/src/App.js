@@ -4,6 +4,7 @@ import Content from './Content.js';
 import Connexion from './Connexion.js';
 import Inscription from './Inscription';
 import Connexion2 from './Connexion2';
+import Pannel from './Pannel';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
           {!register && connected ? <Connexion2 onApproved={handleApproved}/> : null}
           {approved && (
             <>
+              <Pannel />
               <Content title="Job 1" text="Ceci est la première annonce"/>
               <Content title="Job 2" text="Ceci est la deuxième annonce"/>
               <Content title="Job 3" text="Ceci est la troisième annonce"/>
