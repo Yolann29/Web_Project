@@ -25,7 +25,6 @@ function NewOffer({fermer}) {
 
     return (
         <div className="NewOffer">
-            <p>test</p>
             <input type="text" placeholder="Name" onChange={e => setName(e.target.value)}/>
             <input type="text" placeholder="Description"onChange={e => setDescription(e.target.value)}/>
             <button onClick={ajouterDonnee}>Send</button>
