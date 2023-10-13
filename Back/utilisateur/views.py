@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
 import json
-from .models import cmp
+from .models import cmp, advertisement, companies
 
 class Inscription(View):
     def post(self, request, *args, **kwargs):
@@ -29,3 +29,12 @@ class Connexion(View):
         except cmp.DoesNotExist:
             return JsonResponse({'message': 'Non connecté !'}, status=401)
 
+class NewOffer(View):
+    def post(self, request, *args, **kwargs):
+        corps_de_la_requete = json.loads(request.body.decode('utf-8'))
+        name = corps_de_la_requete.get('name')
+        description = corps_de_la_requete.get('description')
+        companie_existante = companies.objects.get(id=1)
+        new_advertisement = advertisement(title=name, description=description, companies=companie_existante)
+        new_advertisement.save()
+        return JsonResponse({'message': 'Reçu !'})
