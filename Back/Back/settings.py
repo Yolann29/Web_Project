@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'utilisateur.apps.UtilisateurConfig',
+    'Adverts.apps.AdvertsConfig',
     'corsheaders',
     'rest_framework',
 ]
@@ -80,7 +81,7 @@ DATABASES = { 'default':
              { 'ENGINE': 'django.db.backends.postgresql',
                'NAME': 'jobboardbdd',
                "USER": 'postgres',
-               "PASSWORD": 'cannere31',
+               "PASSWORD": 'Ardwina29',
                "HOST": "127.0.0.1",
                "PORT": "5432",
              }
