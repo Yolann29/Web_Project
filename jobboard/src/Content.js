@@ -15,7 +15,7 @@ function Content(props) {
         <h1>{props.comp}</h1>
         <h2>{props.disp}</h2>
         <button onClick={handleClick}>Learn more</button>
-        {displayOffer && <Offer text={props.text} fermer={() => setDisplayOffer(false)}/>}
+        {displayOffer && <Offer comp={props.comp} text={props.text} fermer={() => setDisplayOffer(false)}/>}
     </div>
   );
 }

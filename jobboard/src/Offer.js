@@ -1,13 +1,25 @@
 import './App.css';
+import React, { useState } from 'react';
+import Apply from './Apply.js';
+
 
 function Offer(props) {
+
+  const [displayApply, setDisplayApply] = useState(false);
+
+  const handleClick = () => {
+    setDisplayApply(!displayApply);
+};
+
   return (
     <div className="Offer">
       <button onClick={props.fermer}>Back</button>
       <p>{props.text}</p>
-      <button onClick={props.fermer}>Apply</button>
+      <button onClick={handleClick}>Apply</button>
+      {displayApply && <Apply comp={props.comp}/>}
     </div>
   );
 }
+
 
 export default Offer;

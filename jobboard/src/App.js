@@ -36,13 +36,13 @@ function App() {
 
   const handleInscription = () => {
     setRegister(true);
-  }
+  };
 
   const handleApproved = () => {
     setApproved(true);
     setRegister(false);
     setConnected(false);
-  }
+  };
 
   return (
     <div className="App">
