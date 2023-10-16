@@ -12,10 +12,10 @@ function Content(props) {
 
   return (
     <div className="Content">
-        <h1>{props.title}</h1>
-        <p>{props.text}</p>
+        <h1>{props.comp}</h1>
+        <h2>{props.disp}</h2>
         <button onClick={handleClick}>Learn more</button>
-        {displayOffer && <Offer fermer={() => setDisplayOffer(false)} ad="CAPGEMINI"/>}
+        {displayOffer && <Offer text={props.text} fermer={() => setDisplayOffer(false)}/>}
     </div>
   );
 }

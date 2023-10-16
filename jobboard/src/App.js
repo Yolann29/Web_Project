@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Content from './Content.js';
 import Connexion from './Connexion.js';
@@ -7,6 +7,24 @@ import Connexion2 from './Connexion2';
 import Pannel from './Pannel';
 
 function App() {
+  const [ anno, setAnno] = useState([]);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setAnno(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   const [connected, setConnected] = useState(false);
   const [register, setRegister] = useState(false);
@@ -37,14 +55,15 @@ function App() {
           {approved && (
             <>
               <Pannel />
-              <Content title="Job 1" text="Ceci est la première annonce"/>
-              <Content title="Job 2" text="Ceci est la deuxième annonce"/>
-              <Content title="Job 3" text="Ceci est la troisième annonce"/>
-              <Content title="Job 4" text="Ceci est la quatrième annonce"/>
-              <Content title="Job 5" text="Ceci est la cinquième annonce"/>
-              <Content title="Job 6" text="Ceci est la sixième annonce"/>
-              <Content title="Job 7" text="Ceci est la septième annonce"/>
-              <Content title="Job 8" text="Ceci est la huitième annonce"/>
+              {anno && (
+              <ul>
+                {anno.map((item, index) => (
+                  <li key={index}>
+                    <Content disp={item.superuser} comp={item.companies_name} text={item.description}/>
+                  </li>
+                ))}
+              </ul>
+              )}
             </>
           )}
         </>

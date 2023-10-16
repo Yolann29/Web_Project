@@ -1,18 +1,25 @@
 * {
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
 body {
   display: flex;
-  width: 100%;
   background-color: blue;
 }
 
 .App {
   display: flex;
-  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+  text-align: center;
+}
+
+.App ul {
+  list-style: none;
+  display: flex;
+  gap: 80px;
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: space-around;
@@ -28,11 +35,11 @@ body {
 }
 
 .Content h1 {
-  height: 20%;
+  height: 15%;
 }
 
-.Content p {
-  height: 40%;
+.Content h2 {
+  height: 15%;
 }
 
 .Content button {

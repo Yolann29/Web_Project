@@ -5,13 +5,13 @@ from Api.serializers import AnnonceSerializer
 
 @api_view(['GET'])
 def GetData(request):
-    annonce = Annonce.objects.get(companies_name="CAPGEMINI")
-    serializer = AnnonceSerializer(annonce)
+    annonces = Annonce.objects.all()
+    serializer = AnnonceSerializer(annonces, many=True)
     return Response(serializer.data)
 
-# @api_view(['POST'])
-# def AddData(request):
-#     serializer = AnnonceSerializer(data=request.data)
-#     if serializer.is_valid():
-#         serializer.save()
-#     return Response(serializer.data)
+@api_view(['POST'])
+def AddData(request):
+    serializer = AnnonceSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
