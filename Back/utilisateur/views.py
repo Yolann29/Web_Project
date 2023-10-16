@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
 import json
-from .models import cmp, advertisement, companies
+from django.shortcuts import render
+from .forms import SelectCompanyForm
+from .models import cmp, advertisement, companies, permissions
 
 class Inscription(View):
     def post(self, request, *args, **kwargs):
@@ -11,8 +13,15 @@ class Inscription(View):
         first_name = corps_de_la_requete.get('first_name')
         username = corps_de_la_requete.get('username')
         password = corps_de_la_requete.get('password')
-        email = corps_de_la_requete.get('email')   
-        nouvel_utilisateur = cmp(surname=surname, first_name=first_name, username=username, password=password, email=email)
+        email = corps_de_la_requete.get('email') 
+        selected_company_id = corps_de_la_requete.get('companies')  
+        try:
+            selected_company = companies.objects.get(id=selected_company_id)
+        except companies.DoesNotExist:
+            return JsonResponse({'message': 'Entreprise non trouvée'}, status=400)
+        nouvel_utilisateur = cmp(surname=surname, first_name=first_name, username=username, password=password, email=email, companies=selected_company)
+        nouvel_utilisateur.save()
+        nouvel_utilisateur.permissions = permissions.objects.get(id=2)
         nouvel_utilisateur.save()
         return JsonResponse({'message': 'Reçu !'})
     
@@ -38,3 +47,7 @@ class NewOffer(View):
         new_advertisement = advertisement(title=name, description=description, companies=companie_existante)
         new_advertisement.save()
         return JsonResponse({'message': 'Reçu !'})
+
+def get_companies(request):
+    companies_list = companies.objects.order_by('name').values('id', 'name')
+    return JsonResponse(list(companies_list), safe=False)

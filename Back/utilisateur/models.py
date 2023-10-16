@@ -20,7 +20,7 @@ def get_first_company():
 class cmp(models.Model):
     surname = models.CharField(max_length=50)
     first_name = models.CharField(max_length=50)
-    username = models.CharField(max_length=30)
+    username = models.CharField(max_length=30, unique=True)
     password = models.CharField()
     email = models.EmailField()
     permissions = models.ForeignKey('permissions', on_delete=models.CASCADE, default=1)
