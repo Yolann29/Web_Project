@@ -107,6 +107,15 @@ body {
   height: 50px;
 }
 
+#compform {
+  width: 600px;
+  height: 50px;
+}
+
+.Inscription select {
+  width: 100%;
+}
+
 .Connexion2 {
   display: flex;
   flex-direction: column;
