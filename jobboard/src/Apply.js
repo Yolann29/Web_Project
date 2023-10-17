@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Offer from './Offer.js';
 
 function Apply(props) {
     const [lname, setLname] = useState(null);
@@ -7,6 +8,7 @@ function Apply(props) {
 
     const handleSubmit = async (sub) => {
         sub.preventDefault();
+        props.fermer();
 
         const data = {
         'company': props.comp,
@@ -15,6 +17,7 @@ function Apply(props) {
         'first_name': fname,
         'email': email
         };
+        console.log(data);
 
         try {
             const response = await fetch('http://127.0.0.1:8000/apply', {
@@ -27,7 +30,10 @@ function Apply(props) {
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
+            } else {
+                alert("Applying successfully")
             };
+            
 
             const responseData = await response.json();
             console.log(responseData);
@@ -44,7 +50,7 @@ function Apply(props) {
             <input type="text" id="first_name" name="first_name" value={fname} onChange={(ev) => setFname(ev.target.value)}/>
             <label id="email">Email :</label>
             <input type="email" id="email" name="email" value={email} onChange={(ev) => setEmail(ev.target.value)}/>
-            <input type="submit" value="Confirm"/>
+            <input type="submit" value="Confirm" />
         </form>
   );
 }

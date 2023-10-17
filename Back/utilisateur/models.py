@@ -38,3 +38,10 @@ class advertisement(models.Model):
     class Meta:
         verbose_name = 'advertisement'
         verbose_name_plural = 'advertisements'
+
+class JobApplication(models.Model):
+    company = models.ForeignKey(companies, on_delete=models.CASCADE)
+    applicant = models.ForeignKey(cmp, on_delete=models.CASCADE)
+    surname = models.CharField()
+    first_name = models.CharField()
+    email = models.EmailField()

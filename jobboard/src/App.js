@@ -7,8 +7,8 @@ import Connexion2 from './Connexion2';
 import Pannel from './Pannel';
 
 function App() {
-  const [ anno, setAnno] = useState([]);
-
+  const [ anno, setAnno ] = useState([]);
+  console.log("papa");
   useEffect(() => {
     fetch('http://127.0.0.1:8000')
       .then((response) => {
@@ -20,6 +20,11 @@ function App() {
       .then((data) => {
         console.log(data);
         setAnno(data);
+        if (data == []) {
+          console.log("dada");
+          setAnno({"title":"No advertisements for the moment"});
+        }
+        console.log(anno);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -54,16 +59,18 @@ function App() {
           {!register && connected ? <Connexion2 onApproved={handleApproved}/> : null}
           {approved && (
             <>
-              <Pannel />
-              {anno && (
+              <Pannel/>
               <ul>
-                {anno.map((item, index) => (
+                {anno.length > 0 ? (
+                anno.map((item, index) => (
                   <li key={index}>
-                    <Content disp={item.superuser} comp={item.companies_name} text={item.description}/>
+                    <Content title={item.title} text={item.description} comp={item.companies}/>
                   </li>
-                ))}
+                ))
+                ) : (
+                  <p>No advertisements for the moment</p>
+                )}
               </ul>
-              )}
             </>
           )}
         </>

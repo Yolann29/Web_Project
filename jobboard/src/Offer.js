@@ -16,9 +16,9 @@ function Offer(props) {
       <button onClick={props.fermer}>Back</button>
       <p>{props.text}</p>
       <button onClick={handleClick}>Apply</button>
-      {displayApply && <Apply comp={props.comp}/>}
+      {displayApply && <Apply comp={props.comp} fermer={props.fermer}/>}
     </div>
-  );
+  );  
 }
 
 
