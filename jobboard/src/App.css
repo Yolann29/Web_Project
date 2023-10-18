@@ -5,7 +5,7 @@
 
 body {
   display: flex;
-  background-color: blue;
+  background-color: rgb(190, 190, 239);
 }
 
 .App {
@@ -31,7 +31,7 @@ body {
 .Content {
   height: 250px;
   width: 250px;
-  background-color: red;
+  background-color: white;
 }
 
 .Content h1 {
@@ -50,7 +50,7 @@ body {
 .Offer {
   width: 94%;
   height: 92%;
-  background-color: yellow;
+  background-color: rgb(234, 234, 179);
   position: absolute;
   top: 4%;
   left: 3%;
