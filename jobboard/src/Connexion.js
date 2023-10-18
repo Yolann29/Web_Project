@@ -1,4 +1,4 @@
-function Connexion({connect, connect2 }) {
+function Connexion({connect, connect2}) {
 
     return (
       <div className="Connexion">
