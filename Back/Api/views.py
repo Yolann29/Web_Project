@@ -32,5 +32,3 @@ def AddJobApp(request):
     )
     modele_instance.save()
     return Response(data)
-
-print("lapin")
