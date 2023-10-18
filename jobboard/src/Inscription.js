@@ -19,6 +19,7 @@ function Inscription(props) {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [selectedCompany, setSelectedCompany] = useState('');
+    const [showNewCompany, setShowNewCompany] = useState(false);
     const [companies, setCompanies] = useState([]);
 
     const ajouterDonnee = () => {
@@ -39,6 +40,19 @@ function Inscription(props) {
             .catch(err => console.log(err));
     }
 
+    const handleCompanyChange = (e) => {
+        const selectedValue = e.target.value;
+        setSelectedCompany(selectedValue);
+    
+        // Activer l'affichage du champ supplémentaire lorsque "Nouvelle companie" est sélectionné
+        if (selectedValue === 'Nouvelle companie') {
+          setShowNewCompany(true);
+        } else {
+          setShowNewCompany(false);
+        }
+      };
+
+
     return (
         <div className="Inscription">
             <input type="text" placeholder="Surname" onChange={e => setSurname(e.target.value)} />
@@ -49,7 +63,7 @@ function Inscription(props) {
             <div id="compform">
                 <select
                     value={selectedCompany}
-                    onChange={(e) => setSelectedCompany(e.target.value)}
+                    onChange={handleCompanyChange}
                 >
                     <option value="">Sélectionnez une entreprise</option>
                     {companies.map((company) => (

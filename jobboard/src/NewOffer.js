@@ -6,13 +6,13 @@ function NewOffer({fermer}) {
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const companies=1;
+    const username = localStorage.getItem('username');
 
     const ajouterDonnee = () => {
         axios.post('http://127.0.0.1:8000/utilisateur/newoffer', {
             name,
             description,
-            companies
+            username,
             })
             .then(res => {
                 console.log(res);
