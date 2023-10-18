@@ -43,8 +43,15 @@ class NewOffer(View):
         corps_de_la_requete = json.loads(request.body.decode('utf-8'))
         name = corps_de_la_requete.get('name')
         description = corps_de_la_requete.get('description')
-        companie_existante = companies.objects.get(id=1)
-        new_advertisement = advertisement(title=name, description=description, companies=companie_existante)
+        
+        selected_username_id = corps_de_la_requete.get('username')  
+        try:
+            selected_username = cmp.objects.get(username=selected_username_id)
+        except cmp.DoesNotExist:
+            return JsonResponse({'message': 'Utilisateur non trouvé'}, status=400)
+        companies = selected_username.companies
+        
+        new_advertisement = advertisement(title=name, description=description, cmp=selected_username, companies=companies)
         new_advertisement.save()
         return JsonResponse({'message': 'Reçu !'})
 

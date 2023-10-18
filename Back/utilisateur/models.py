@@ -33,6 +33,7 @@ class cmp(models.Model):
 class advertisement(models.Model):
     title = models.CharField()
     description = models.CharField()
+    cmp = models.ForeignKey('cmp', on_delete=models.CASCADE)
     companies = models.ForeignKey('companies', on_delete=models.CASCADE)
 
     class Meta:
