@@ -17,6 +17,7 @@ function NewOffer({fermer}) {
             .then(res => {
                 console.log(res);
                 if (res.status === 200) {
+                    alert("Offre postée");
                     console.log("Offre postée");
                 }
             })

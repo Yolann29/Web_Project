@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Offer from './Offer.js';
 
 function Apply(props) {
     const [lname, setLname] = useState(null);

@@ -52,7 +52,7 @@ function App() {
   return (
     <div className="App">
       {!connected && !register && !approved ? (
-        <Connexion connect={handleConnexion} connect2={handleInscription} connect3={handleInscription}/>
+        <Connexion connect={handleConnexion} connect2={handleInscription}/>
       ) : (
         <>
           {register && !connected ? <Inscription onApproved={handleApproved}/> : null}
