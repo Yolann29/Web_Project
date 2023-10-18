@@ -8,7 +8,6 @@ import Pannel from './Pannel';
 
 function App() {
   const [ anno, setAnno ] = useState([]);
-  console.log("papa");
   useEffect(() => {
     fetch('http://127.0.0.1:8000')
       .then((response) => {
@@ -21,10 +20,8 @@ function App() {
         console.log(data);
         setAnno(data);
         if (data == []) {
-          console.log("dada");
           setAnno({"title":"No advertisements for the moment"});
         }
-        console.log(anno);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -64,7 +61,7 @@ function App() {
                 {anno.length > 0 ? (
                 anno.map((item, index) => (
                   <li key={index}>
-                    <Content title={item.title} text={item.description} comp={item.companies}/>
+                    <Content id={item.id} title={item.title} text={item.description} comp={item.companies}/>
                   </li>
                 ))
                 ) : (

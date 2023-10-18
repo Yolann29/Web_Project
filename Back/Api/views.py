@@ -8,7 +8,6 @@ import json
 def GetAnn(request):
     annonces = advertisement.objects.all()
     serializer = AnnonceSerializer(annonces, many=True)
-    print(serializer.data)
     for data in serializer.data:
         c_id = data.get("companies")
         if c_id is not None:
@@ -22,13 +21,24 @@ def GetAnn(request):
 @api_view(['POST'])
 def AddJobApp(request):
     data = json.loads(request.body)
-    print(data)
     modele_instance = JobApplication(
         company = companies.objects.get(name=data['company']),
         applicant = cmp.objects.get(username=data['applicant']),
         surname = data['surname'],
         first_name = data['first_name'],
         email = data['email']
+    )
+    modele_instance.save()
+    return Response(data)
+
+@api_view(['PUT'])
+def ModAnn(request):
+    data = json.loads(request.body)
+    annonce = advertisement.objects.get(id=data.id)
+    modele_instance = advertisement(
+        title = data['title'],
+        description = data['description'],
+        cmp = data['surname'],
     )
     modele_instance.save()
     return Response(data)
