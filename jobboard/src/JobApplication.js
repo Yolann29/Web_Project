@@ -45,6 +45,7 @@ function JobApplication() {
                         <p>{item.surname}</p>
                         <p>{item.first_name}</p>
                         <p>{item.email}</p>
+                        <button>Delete</button>
                     </li>
                 ))
                 ) : (
