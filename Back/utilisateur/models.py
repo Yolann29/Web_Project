@@ -23,8 +23,8 @@ class cmp(models.Model):
     username = models.CharField(max_length=30, unique=True)
     password = models.CharField()
     email = models.EmailField()
-    permissions = models.ForeignKey('permissions', on_delete=models.CASCADE, default=1)
-    companies = models.ForeignKey('companies', on_delete=models.CASCADE, default=get_first_company)
+    permissions = models.ForeignKey(permissions, on_delete=models.CASCADE, default=1)
+    companies = models.ForeignKey(companies, on_delete=models.CASCADE, default=get_first_company)
 
     class Meta:
         verbose_name = 'cmp'
@@ -33,16 +33,16 @@ class cmp(models.Model):
 class advertisement(models.Model):
     title = models.CharField()
     description = models.CharField()
-    cmp = models.ForeignKey('cmp', on_delete=models.CASCADE)
-    companies = models.ForeignKey('companies', on_delete=models.CASCADE)
+    cmp = models.ForeignKey(cmp, on_delete=models.CASCADE)
+    companies = models.ForeignKey(companies, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'advertisement'
         verbose_name_plural = 'advertisements'
 
 class JobApplication(models.Model):
-    company = models.ForeignKey(companies, on_delete=models.CASCADE)
     applicant = models.ForeignKey(cmp, on_delete=models.CASCADE)
     surname = models.CharField()
     first_name = models.CharField()
     email = models.EmailField()
+    advert = models.ForeignKey(advertisement, on_delete=models.CASCADE)

@@ -8,7 +8,6 @@ import Pannel from './Pannel';
 
 function App() {
   const [ anno, setAnno ] = useState([]);
-  console.log("papa");
   useEffect(() => {
     fetch('http://127.0.0.1:8000')
       .then((response) => {
@@ -60,7 +59,7 @@ function App() {
           {approved && (
             <>
               <Pannel/>
-              <ul>
+              <ul class="appul">
                 {anno.length > 0 ? (
                 anno.map((item, index) => (
                   <li key={index}>

@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from utilisateur.models import advertisement, JobApplication, companies, cmp
-from Api.serializers import AnnonceSerializer, CompaniesSerializer
+from Api.serializers import AnnonceSerializer, CompaniesSerializer, JobApplicationSerializer
 import json
 
 @api_view(['GET'])
@@ -24,7 +24,6 @@ def AddJobApp(request):
     data = json.loads(request.body)
     print(data)
     modele_instance = JobApplication(
-        company = companies.objects.get(name=data['company']),
         applicant = cmp.objects.get(username=data['applicant']),
         surname = data['surname'],
         first_name = data['first_name'],
@@ -33,4 +32,15 @@ def AddJobApp(request):
     modele_instance.save()
     return Response(data)
 
-print("tortue")
+@api_view(['POST'])
+def GetJobApply(request):
+    data = json.loads(request.body)
+    print(data)
+    cmpname = cmp.objects.get(username = data['applicant'])
+    print(cmpname)
+    postulate = JobApplication.objects.filter(applicant=cmpname.id)
+    print(cmpname.id)
+    print(postulate)
+    serializer = JobApplicationSerializer(postulate, many=True)
+    print(serializer.data)
+    return Response(serializer.data)
