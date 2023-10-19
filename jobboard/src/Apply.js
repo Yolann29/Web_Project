@@ -12,6 +12,7 @@ function Apply(props) {
         const data = {
         'company': props.comp,
         'applicant': localStorage.getItem("username"),
+        'advert': props.id,
         'surname': lname,
         'first_name': fname,
         'email': email

@@ -43,6 +43,7 @@ class advertisement(models.Model):
 class JobApplication(models.Model):
     company = models.ForeignKey(companies, on_delete=models.CASCADE)
     applicant = models.ForeignKey(cmp, on_delete=models.CASCADE)
+    advert = models.ForeignKey(advertisement, on_delete=models.CASCADE)
     surname = models.CharField()
     first_name = models.CharField()
     email = models.EmailField()

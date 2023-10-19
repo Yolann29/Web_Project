@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from utilisateur.models import advertisement, JobApplication, companies, cmp
-from Api.serializers import AnnonceSerializer, CompaniesSerializer
+from Api.serializers import AnnonceSerializer, CompaniesSerializer, JobApplicationSerializer
 import json
 
 @api_view(['GET'])
@@ -18,12 +18,29 @@ def GetAnn(request):
             data['companies'] = None
     return Response(serializer.data)
 
+@api_view(['GET'])
+def GetJobAd(request):
+    data = json.loads(request.body)
+    print(data)
+    utilisateur = cmp.objects.get(username=data['username'])
+    print(utilisateur)
+    ads = advertisement.objects.filter(cmp=utilisateur.id)
+    print(ads)
+    rep = None
+    for ad in ads:
+        job_ads = JobApplication.objects.filter(advert=ad.id)
+        serializer = JobApplicationSerializer(job_ads, many=True)
+        rep = rep + serializer.data
+        print(rep)
+    return Response(rep)
+
 @api_view(['POST'])
 def AddJobApp(request):
     data = json.loads(request.body)
     modele_instance = JobApplication(
         company = companies.objects.get(name=data['company']),
         applicant = cmp.objects.get(username=data['applicant']),
+        advert = data['advert'],
         surname = data['surname'],
         first_name = data['first_name'],
         email = data['email']
@@ -38,7 +55,8 @@ def ModAnn(request):
     modele_instance = advertisement(
         title = data['title'],
         description = data['description'],
-        cmp = data['surname'],
+        cmp = cmp.objects.get(username=data['useername']),
     )
     modele_instance.save()
-    return Response(data)
+    serializer = AnnonceSerializer(annonce)
+    return Response(serializer.data)
