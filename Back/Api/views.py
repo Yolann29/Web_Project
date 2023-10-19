@@ -46,6 +46,7 @@ def GetJobApply(request):
     return Response(serializer.data)
 
 @api_view(['DELETE'])
-def DeleteJobApply(request):
-    article = JobApplication.objects.get(applicant=article.id)
+def DeleteJobApply(request, article_id):
+    data = json.loads(request.body)
+    article = JobApplication.objects.get(apply=article_id)
     article.delete()

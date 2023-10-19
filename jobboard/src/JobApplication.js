@@ -36,6 +36,22 @@ function JobApplication() {
           });
       }, []);
 
+  const deleteApply = (articleId) => {
+    fetch(`http://127.0.0.1:8000/delete_apply/${articleId}/`, {
+      method: 'DELETE',
+    })
+    .then((response) => {
+      if (response.status === 204) {
+        console.log('Article supprimé avec succès');
+      } else {
+        console.log('Erreur lors de la suppression');
+      }
+    })
+    .catch((error) => {
+      console.log('Erreur réseau ou autre : ', error);
+    });
+  };
+
     return (
         <div className="JobApplication">
             <ul>
@@ -45,7 +61,7 @@ function JobApplication() {
                         <p>{item.surname}</p>
                         <p>{item.first_name}</p>
                         <p>{item.email}</p>
-                        <button>Delete</button>
+                        <button onClick={deleteApply}>Delete</button>
                     </li>
                 ))
                 ) : (
