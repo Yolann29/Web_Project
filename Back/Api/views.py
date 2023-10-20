@@ -47,6 +47,7 @@ def GetJobApply(request):
 
 @api_view(['DELETE'])
 def DeleteJobApply(request, article_id):
-    data = json.loads(request.body)
-    article = JobApplication.objects.get(apply=article_id)
+    article = JobApplication.objects.get(id=article_id)
+    print("ok")
     article.delete()
+    return Response("success")

@@ -36,13 +36,15 @@ function JobApplication() {
           });
       }, []);
 
-  const deleteApply = (articleId) => {
-    fetch(`http://127.0.0.1:8000/delete_apply/${articleId}/`, {
-      method: 'DELETE',
-    })
+    const deleteApply = (articleId) => {
+      fetch(`http://127.0.0.1:8000/delete_apply/${articleId}/`, {
+        method: 'DELETE',
+      })
     .then((response) => {
       if (response.status === 204) {
         console.log('Article supprimé avec succès');
+        const updatedAnno = anno.filter(item => item.id !== articleId); // Créer une nouvelle liste sans l'article supprimé
+        setAnno(updatedAnno); // Mettre à jour l'état
       } else {
         console.log('Erreur lors de la suppression');
       }
@@ -61,7 +63,7 @@ function JobApplication() {
                         <p>{item.surname}</p>
                         <p>{item.first_name}</p>
                         <p>{item.email}</p>
-                        <button onClick={deleteApply}>Delete</button>
+                        <button onClick={() => deleteApply(item.id)}>Delete</button>
                     </li>
                 ))
                 ) : (
