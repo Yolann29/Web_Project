@@ -41,7 +41,6 @@ class advertisement(models.Model):
         verbose_name_plural = 'advertisements'
 
 class JobApplication(models.Model):
-    company = models.ForeignKey(companies, on_delete=models.CASCADE)
     applicant = models.ForeignKey(cmp, on_delete=models.CASCADE)
     advert = models.ForeignKey(advertisement, on_delete=models.CASCADE)
     surname = models.CharField()

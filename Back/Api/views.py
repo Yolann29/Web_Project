@@ -18,27 +18,27 @@ def GetAnn(request):
             data['companies'] = None
     return Response(serializer.data)
 
-@api_view(['GET'])
-def GetJobAd(request):
-    data = json.loads(request.body)
-    print(data)
-    utilisateur = cmp.objects.get(username=data['username'])
-    print(utilisateur)
-    ads = advertisement.objects.filter(cmp=utilisateur.id)
-    print(ads)
-    rep = None
-    for ad in ads:
-        job_ads = JobApplication.objects.filter(advert=ad.id)
-        serializer = JobApplicationSerializer(job_ads, many=True)
-        rep = rep + serializer.data
-        print(rep)
-    return Response(rep)
+@api_view(['PUT'])
+def ModAnn(request):
+    if request == 'PUT':
+        data = json.loads(request.body)
+        annonce = advertisement.objects.get(id=data.id)
+        annonce.title = data['title'],
+        annonce.description = data['description'],
+        annonce.save()
+        return Response("Success")
+    if request == 'DELETE':
+        data = json.loads(request.body)
+        annonce = advertisement.objects.get(id=data.id)
+        annonce.delete()
+        return Response("Success")
+    else:
+        return Response("Unknown method")
 
 @api_view(['POST'])
 def AddJobApp(request):
     data = json.loads(request.body)
     modele_instance = JobApplication(
-        company = companies.objects.get(name=data['company']),
         applicant = cmp.objects.get(username=data['applicant']),
         advert = data['advert'],
         surname = data['surname'],
@@ -46,17 +46,23 @@ def AddJobApp(request):
         email = data['email']
     )
     modele_instance.save()
-    return Response(data)
+    return Response("Success")
 
-@api_view(['PUT'])
-def ModAnn(request):
-    data = json.loads(request.body)
-    annonce = advertisement.objects.get(id=data.id)
-    modele_instance = advertisement(
-        title = data['title'],
-        description = data['description'],
-        cmp = cmp.objects.get(username=data['useername']),
-    )
-    modele_instance.save()
-    serializer = AnnonceSerializer(annonce)
-    return Response(serializer.data)
+@api_view(['PUT','DELETE'])
+def ModJobApp(request):
+    if request == 'PUT':
+        data = json.loads(request.body)
+        job_app = JobApplication.objects.get(advert=data.id)
+        print(job_app)
+        job_app.surname = data['surname']
+        job_app.first_name = data['first_name']
+        job_app.email = data['email']
+        job_app.save()
+        return Response("Success")
+    if request == 'DELETE':
+        data = json.loads(request.body)
+        job_app = JobApplication.objects.get(id=data.id)
+        job_app.delete()
+        return Response("Success")
+    else:
+        return Response("Unknown method")

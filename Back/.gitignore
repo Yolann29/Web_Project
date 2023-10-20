@@ -10,4 +10,8 @@ utilisateur/__pycache__/forms.cpython-310.pyc
 utilisateur/__pycache__/models.cpython-310.pyc
 utilisateur/__pycache__/urls.cpython-310.pyc
 utilisateur/__pycache__/views.cpython-310.pyc
-utilisateur/migrations/__pycache__/
+utilisateur/migrations/__pycache__/0002_advertisement_cmp_alter_cmp_username.cpython-38.pyc
+utilisateur/migrations/0001_initial.py
+utilisateur/migrations/0002_advertisement_cmp_alter_cmp_username.py
+utilisateur/migrations/__pycache__/0001_initial.cpython-310.pyc
+utilisateur/migrations/__pycache__/__init__.cpython-310.pyc
