@@ -5,5 +5,6 @@ urlpatterns = [
     path("", views.GetAnn),
     path("apply", views.AddJobApp),
     path("modApp", views.ModJobApp),
-    path("modAnn", views.ModAnn)
+    path("modAnn", views.ModAnn),
+    path("superadmin", views.AdminAffichage)
 ]

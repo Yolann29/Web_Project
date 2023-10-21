@@ -1,8 +1,9 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from utilisateur.models import advertisement, JobApplication, companies, cmp
-from Api.serializers import AnnonceSerializer, CompaniesSerializer, JobApplicationSerializer
+from Api.serializers import AnnonceSerializer, CompaniesSerializer, JobApplicationSerializer, CmpSerializer
 import json
+
 
 @api_view(['GET'])
 def GetAnn(request):
@@ -17,6 +18,7 @@ def GetAnn(request):
         else:
             data['companies'] = None
     return Response(serializer.data)
+
 
 @api_view(['PUT'])
 def ModAnn(request):
@@ -35,9 +37,11 @@ def ModAnn(request):
     else:
         return Response("Unknown method")
 
+
 @api_view(['POST'])
 def AddJobApp(request):
     data = json.loads(request.body)
+    print("ici")
     modele_instance = JobApplication(
         applicant = cmp.objects.get(username=data['applicant']),
         advert = data['advert'],
@@ -47,6 +51,7 @@ def AddJobApp(request):
     )
     modele_instance.save()
     return Response("Success")
+
 
 @api_view(['PUT','DELETE'])
 def ModJobApp(request):
@@ -66,3 +71,27 @@ def ModJobApp(request):
         return Response("Success")
     else:
         return Response("Unknown method")
+
+
+@api_view(['GET'])
+def AdminAffichage(request):
+    rep = []
+    
+    cmps = cmp.objects.all()
+    sercmps = CmpSerializer(cmps, many=True)
+    rep.append(sercmps.data)
+    
+    ads = advertisement.objects.all()
+    serads = AnnonceSerializer(ads, many=True)
+    rep.append(serads.data)
+    
+    jobapps = JobApplication.objects.all()
+    serjobapps = JobApplicationSerializer(jobapps, many=True)
+    rep.append(serjobapps.data)
+    
+    comps = companies.objects.all()
+    sercomps = CompaniesSerializer(comps, many=True)
+    rep.append(sercomps.data)
+    
+    return Response(rep)
+    

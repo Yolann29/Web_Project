@@ -23,7 +23,7 @@ class cmp(models.Model):
     username = models.CharField(max_length=30, unique=True)
     password = models.CharField()
     email = models.EmailField()
-    permissions = models.ForeignKey('permissions', on_delete=models.CASCADE, default=1)
+    permissions = models.ForeignKey('permissions', on_delete=models.CASCADE, default=2)
     companies = models.ForeignKey('companies', on_delete=models.CASCADE, default=get_first_company)
 
     class Meta:
