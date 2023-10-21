@@ -169,7 +169,7 @@ const handleClick = (index) => {
                           <td>{item.first_name}</td>
                           <td>{item.email}</td>
                           <td class="btn2" onClick={() => handleClick(index)}>Modify</td>
-                          {displayModAnn === index && <Modify form={item} labels={["id","advert","applicant","surname","first_name","eamil"]} fermer={() => setDisplayModAnn(null)} />}
+                          {displayModAnn === index && <Modify table="modJobApp" id={item.id} labels={["advert","applicant","surname","first_name","email"]} fermer={() => setDisplayModAnn(null)} />}
                         </tr>
                       ))}
                       </tbody>

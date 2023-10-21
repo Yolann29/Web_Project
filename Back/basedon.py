@@ -87,13 +87,13 @@ print(color + "Success creating new objects in advertisement !")
 
 #New rows for JobApplication :
 
-JobApplication.objects.create(applicant_id=cmp.objects.get(pk=2).id, advert_id=1, first_name=cmp.objects.get(pk=2).first_name, surname=cmp.objects.get(pk=2).surname, email=cmp.objects.get(pk=2).email) #id = 1
-JobApplication.objects.create(applicant_id=cmp.objects.get(pk=3).id, advert_id=2, first_name=cmp.objects.get(pk=3).first_name, surname=cmp.objects.get(pk=3).surname, email=cmp.objects.get(pk=3).email) #id = 2
-JobApplication.objects.create(applicant_id=cmp.objects.get(pk=3).id, advert_id=3, first_name=cmp.objects.get(pk=3).first_name, surname=cmp.objects.get(pk=3).surname, email=cmp.objects.get(pk=3).email) #id = 3
-JobApplication.objects.create(applicant_id=cmp.objects.get(pk=4).id, advert_id=1, first_name=cmp.objects.get(pk=4).first_name, surname=cmp.objects.get(pk=4).surname, email=cmp.objects.get(pk=4).email) #id = 4
-JobApplication.objects.create(applicant_id=cmp.objects.get(pk=4).id, advert_id=1, first_name=cmp.objects.get(pk=4).first_name, surname=cmp.objects.get(pk=4).surname, email=cmp.objects.get(pk=4).email) #id = 5
-JobApplication.objects.create(applicant_id=cmp.objects.get(pk=4).id, advert_id=2, first_name=cmp.objects.get(pk=4).first_name, surname=cmp.objects.get(pk=4).surname, email=cmp.objects.get(pk=4).email) #id = 6
-JobApplication.objects.create(applicant_id=cmp.objects.get(pk=5).id, advert_id=1, first_name=cmp.objects.get(pk=5).first_name, surname=cmp.objects.get(pk=5).surname, email=cmp.objects.get(pk=5).email) #id = 7
-JobApplication.objects.create(applicant_id=cmp.objects.get(pk=5).id, advert_id=2, first_name=cmp.objects.get(pk=5).first_name, surname=cmp.objects.get(pk=5).surname, email=cmp.objects.get(pk=5).email) #id = 8
-JobApplication.objects.create(applicant_id=cmp.objects.get(pk=5).id, advert_id=3, first_name=cmp.objects.get(pk=5).first_name, surname=cmp.objects.get(pk=5).surname, email=cmp.objects.get(pk=5).email) #id = 9
+JobApplication.objects.create(applicant_id=cmp.objects.get(pk=2).id, advert_id=advertisement.objects.get(id=1).id, first_name=cmp.objects.get(pk=2).first_name, surname=cmp.objects.get(pk=2).surname, email=cmp.objects.get(pk=2).email) #id = 1
+JobApplication.objects.create(applicant_id=cmp.objects.get(pk=3).id, advert_id=advertisement.objects.get(id=2).id, first_name=cmp.objects.get(pk=3).first_name, surname=cmp.objects.get(pk=3).surname, email=cmp.objects.get(pk=3).email) #id = 2
+JobApplication.objects.create(applicant_id=cmp.objects.get(pk=3).id, advert_id=advertisement.objects.get(id=3).id, first_name=cmp.objects.get(pk=3).first_name, surname=cmp.objects.get(pk=3).surname, email=cmp.objects.get(pk=3).email) #id = 3
+JobApplication.objects.create(applicant_id=cmp.objects.get(pk=4).id, advert_id=advertisement.objects.get(id=1).id, first_name=cmp.objects.get(pk=4).first_name, surname=cmp.objects.get(pk=4).surname, email=cmp.objects.get(pk=4).email) #id = 4
+JobApplication.objects.create(applicant_id=cmp.objects.get(pk=4).id, advert_id=advertisement.objects.get(id=1).id, first_name=cmp.objects.get(pk=4).first_name, surname=cmp.objects.get(pk=4).surname, email=cmp.objects.get(pk=4).email) #id = 5
+JobApplication.objects.create(applicant_id=cmp.objects.get(pk=4).id, advert_id=advertisement.objects.get(id=2).id, first_name=cmp.objects.get(pk=4).first_name, surname=cmp.objects.get(pk=4).surname, email=cmp.objects.get(pk=4).email) #id = 6
+JobApplication.objects.create(applicant_id=cmp.objects.get(pk=5).id, advert_id=advertisement.objects.get(id=1).id, first_name=cmp.objects.get(pk=5).first_name, surname=cmp.objects.get(pk=5).surname, email=cmp.objects.get(pk=5).email) #id = 7
+JobApplication.objects.create(applicant_id=cmp.objects.get(pk=5).id, advert_id=advertisement.objects.get(id=2).id, first_name=cmp.objects.get(pk=5).first_name, surname=cmp.objects.get(pk=5).surname, email=cmp.objects.get(pk=5).email) #id = 8
+JobApplication.objects.create(applicant_id=cmp.objects.get(pk=5).id, advert_id=advertisement.objects.get(id=3).id, first_name=cmp.objects.get(pk=5).first_name, surname=cmp.objects.get(pk=5).surname, email=cmp.objects.get(pk=5).email) #id = 9
 print(color + "Success creating new objects in JobApplication !")

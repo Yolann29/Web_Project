@@ -20,7 +20,7 @@ def GetAnn(request):
     return Response(serializer.data)
 
 
-@api_view(['PUT'])
+@api_view(['PUT','DELETE'])
 def ModAnn(request):
     if request == 'PUT':
         data = json.loads(request.body)
@@ -41,10 +41,10 @@ def ModAnn(request):
 @api_view(['POST'])
 def AddJobApp(request):
     data = json.loads(request.body)
-    print("ici")
+    advert_instance = advertisement.objects.get(id=data['advert'])
     modele_instance = JobApplication(
         applicant = cmp.objects.get(username=data['applicant']),
-        advert = data['advert'],
+        advert = advert_instance,
         surname = data['surname'],
         first_name = data['first_name'],
         email = data['email']
@@ -55,21 +55,24 @@ def AddJobApp(request):
 
 @api_view(['PUT','DELETE'])
 def ModJobApp(request):
-    if request == 'PUT':
+    if request.method == 'PUT':
+        print("over here")
         data = json.loads(request.body)
-        job_app = JobApplication.objects.get(advert=data.id)
+        job_app = JobApplication.objects.get(id=data['id'])
         print(job_app)
         job_app.surname = data['surname']
         job_app.first_name = data['first_name']
         job_app.email = data['email']
         job_app.save()
         return Response("Success")
-    if request == 'DELETE':
+    if request.method == 'DELETE':
         data = json.loads(request.body)
-        job_app = JobApplication.objects.get(id=data.id)
+        print("ici")
+        job_app = JobApplication.objects.get(id=data['id'])
         job_app.delete()
         return Response("Success")
     else:
+        print("là")
         return Response("Unknown method")
 
 

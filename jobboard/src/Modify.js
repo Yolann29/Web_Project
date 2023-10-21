@@ -8,7 +8,7 @@ function Modify(props) {
         console.log(formulaire);
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/view', {
+            const response = await fetch(`http://127.0.0.1:8000/${props.table}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -30,21 +30,28 @@ function Modify(props) {
         sub.preventDefault();
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/view', {
+            const response = await fetch(`http://127.0.0.1:8000/${props.table}`, {
             method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+                body: JSON.stringify({'id' : props.id})
             });
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
+            } else {
+                alert("Delete successfully")
+                window.location.reload();
             }
 
             console.log(response);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
-    }
+    };
 
-    const [formulaire, setFormulaire] = useState({});
+    const [formulaire, setFormulaire] = useState({'id' : props.id});
 
     const handleInputChange = (lab, value) => {
         setFormulaire({ ...formulaire, [lab]: value });
