@@ -1,0 +1,68 @@
+Dans Linux:
+
+git clone git@github.com:EpitechMscProPromo2026/T-WEB-501-TLS_9.git
+
+Aller dans le dossier créé T-WEB-501-TLS_9:
+
+
+Rentrez ces lignes de commande pour créer la base de donnée:
+
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+sudo service postgresql start
+sudo -i -u postgres
+
+Dans postgresql qui s'est ouvert:
+
+psql
+CREATE DATABASE jobboardbdd
+\c jobboardbdd
+\password
+
+Rentrez le mot de passe: cannere
+
+\q
+exit
+
+La base de donnée que l'on va utiliser est créée avec le bon utilisateur et le bon password pour queDjango la reconnaisse.
+
+
+
+On passe dans le dossier Back dans T-WEB-501-TLS_9:
+
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 basedon.py
+
+La base de donnée se remplie de donnée pour des tests avec les tables migrées vers la base.
+
+Toujours dans Back:
+
+python3 manage.py runserver
+
+
+Avec un autre terminal
+
+On passe dans le dossier jobboard dans T-WEB-501-TLS_9:
+
+npm install
+npm start
+
+
+Normalement le site se lance.
+
+Pour se connecter il y a plusieurs comptes avec différentes pemrissions:
+
+1) Utilisateur: Username: Simon password: simon
+2) Entreprise: Username: Luc000 password: admin
+3) Superadmin: Username: admin password: admin
+
+Il faut cliquer sur logout pour vraiment quitter un compte et se connecter à un autre.
+
+4) Interface Django dans http://localhost:8000/admin/: Username: ADMIN password: ADMIN31
+
+
+Libre à vous de changer les données que vous voulez dans basedon.py qui crée justement ces données.
+
+
+J'aurais aimé tester ce protocole de commandes dans une machine virtuelle pour être sûr que ça fonctionne mais je n'ai pas réussi à temps.
