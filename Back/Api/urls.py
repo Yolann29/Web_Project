@@ -11,4 +11,7 @@ urlpatterns = [
     path("superadmin", views.AdminAffichage),
     path("job", views.GetJobApply),
     path("delete_apply/<int:article_id>/", views.DeleteJobApply),
+    path("myads", views.AffichageMyAds),
+    path("myapps", views.AffichageJobApps),
+    
 ]

@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from utilisateur.models import advertisement, JobApplication, companies, cmp
+from utilisateur.models import advertisement, JobApplication, companies, cmp, permissions
 from Api.serializers import AnnonceSerializer, CompaniesSerializer, JobApplicationSerializer, CmpSerializer
 from Api.serializers import AnnonceSerializer, CompaniesSerializer, JobApplicationSerializer
 import json
@@ -70,8 +70,8 @@ def ModUser(request):
         utilisateur.username = data['username']
         utilisateur.password = data['password']
         utilisateur.email = data['email']
-        utilisateur.permissions = data['permissions']
-        utilisateur.companies = data['companies']
+        utilisateur.permissions = permissions.objects.get(id=data['permissions'])
+        utilisateur.companies = companies.objects.get(id=data['companies'])
         utilisateur.save()
         return Response("Success")
     if request.method == 'DELETE':
@@ -88,10 +88,12 @@ def ModAnn(request):
     if request.method == 'PUT':
         data = json.loads(request.body)
         annonce = advertisement.objects.get(id=data['id'])
-        annonce.title = data['title'],
-        annonce.description = data['description'],
-        annonce.cmp = data['cmp'],
-        annonce.companies = data['companies'],
+        annonce.title = data['title']
+        annonce.description = data['description']
+        if 'cmp' in data:
+            annonce.cmp = cmp.objects.get(id=data['cmp'])
+        if 'companies' in data:
+            annonce.companies = companies.objects.get(id=data['companies'])
         annonce.save()
         return Response("Success")
     if request.method == 'DELETE':
@@ -109,6 +111,8 @@ def ModJobApp(request):
     if request.method == 'PUT':
         data = json.loads(request.body)
         job_app = JobApplication.objects.get(id=data['id'])
+        job_app.advert = companies.objects.get(id=data['advert'])
+        job_app.applicant = companies.objects.get(id=data['applicant'])
         job_app.surname = data['surname']
         job_app.first_name = data['first_name']
         job_app.email = data['email']
@@ -144,14 +148,9 @@ def ModComp(request):
 @api_view(['POST'])
 def GetJobApply(request):
     data = json.loads(request.body)
-    print(data)
     cmpname = cmp.objects.get(username = data['applicant'])
-    print(cmpname)
     postulate = JobApplication.objects.filter(applicant=cmpname.id)
-    print(cmpname.id)
-    print(postulate)
     serializer = JobApplicationSerializer(postulate, many=True)
-    print(serializer.data)
     return Response(serializer.data)
 
 
@@ -160,3 +159,20 @@ def DeleteJobApply(request, article_id):
     article = JobApplication.objects.get(id=article_id)
     article.delete()
     return Response("success")
+
+@api_view(['POST'])
+def AffichageMyAds(request):
+    data = json.loads(request.body)
+    utilisateur = cmp.objects.get(username=data['username'])
+    ads = advertisement.objects.filter(cmp=utilisateur.id)
+    serializer = AnnonceSerializer(ads, many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def AffichageJobApps(request):
+    data = json.loads(request.body)
+    print(data)
+    job_apps = JobApplication.objects.filter(advert=data['id'])
+    print(job_apps)
+    serializer = JobApplicationSerializer(job_apps, many=True)
+    return Response(serializer.data)

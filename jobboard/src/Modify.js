@@ -18,6 +18,8 @@ function Modify(props) {
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
+            } else {
+                alert("Update completed successfully, please reload to see the result")
             }
 
             console.log(response);
@@ -41,8 +43,7 @@ function Modify(props) {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             } else {
-                alert("Delete successfully")
-                window.location.reload();
+                alert("Deleted successfully, please reload to see the result")
             }
 
             console.log(response);

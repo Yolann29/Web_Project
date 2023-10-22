@@ -201,7 +201,7 @@ const handleClick = (index) => {
                   }
                 </div>
               ) : (
-                  <ul>
+                  <ul className='appul'>
                     {anno.length > 0 ? (
                     anno.map((item, index) => (
                       <li key={index}>

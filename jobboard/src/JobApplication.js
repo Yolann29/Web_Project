@@ -1,23 +1,20 @@
 import './App.css';
 import React, { useState , useEffect } from 'react';
 
-function JobApplication() {
+function JobApplication(props) {
 
     const [ anno, setAnno ] = useState([]);
-    const anno2 = 'test';
+    const permissions = localStorage.getItem('permissions');
 
-    const data = {
-    'applicant': localStorage.getItem("username")
-    };
-    console.log(data);
+    console.log(props.donnee);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/job', {
+        fetch(`http://127.0.0.1:8000/${props.parametre}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(props.donnee)
         })
           .then((response) => {
             if (!response.ok) {
@@ -63,12 +60,15 @@ function JobApplication() {
                         <p>{item.surname}</p>
                         <p>{item.first_name}</p>
                         <p>{item.email}</p>
-                        <button onClick={() => deleteApply(item.id)}>Delete</button>
+                        {permissions === '2' ? (
+                          <button onClick={() => deleteApply(item.id)}>Delete</button>
+                        ) : null}
                     </li>
                 ))
                 ) : (
-                    <p>{anno2}</p>
+                    <p>No applications for the moment</p>
                 )}
+                <button className='btn2' onClick={props.fermer}>Back</button>
             </ul>
         </div>
     );
