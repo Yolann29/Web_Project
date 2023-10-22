@@ -8,11 +8,11 @@ function Pannel() {
     const [displayJobApplication, setDisplayJobApplication] = useState(false);
     const permissions = localStorage.getItem('permissions');
 
-    const supprimerDonnees = () => {
-        localStorage.removeItem('username');
-        localStorage.removeItem('permissions');
-        window.location.reload();
-    }
+  const supprimerDonnees = () => {
+      localStorage.removeItem('username');
+      localStorage.removeItem('permissions');
+      window.location.reload();
+  }
 
     const handleClick1 = () => {
         setDisplayNewOffer(!displayNewOffer);

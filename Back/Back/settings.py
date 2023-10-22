@@ -80,7 +80,7 @@ DATABASES = { 'default':
              { 'ENGINE': 'django.db.backends.postgresql',
                'NAME': 'jobboardbdd',
                "USER": 'postgres',
-               "PASSWORD": 'cannere',
+               "PASSWORD": 'Ardwina29',
                "HOST": "127.0.0.1",
                "PORT": "5432",
              }
