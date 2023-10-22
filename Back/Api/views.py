@@ -65,13 +65,20 @@ def ModUser(request):
         data = json.loads(request.body)
         utilisateur = cmp.objects.get(id=data['id'])
         print(utilisateur)
-        utilisateur.surname = data['surname']
-        utilisateur.first_name = data['first_name']
-        utilisateur.username = data['username']
-        utilisateur.password = data['password']
-        utilisateur.email = data['email']
-        utilisateur.permissions = permissions.objects.get(id=data['permissions'])
-        utilisateur.companies = companies.objects.get(id=data['companies'])
+        if 'surname' in data:
+            utilisateur.surname = data['surname']
+        if 'first_name' in data:
+            utilisateur.first_name = data['first_name']
+        if 'username' in data:
+            utilisateur.username = data['username']
+        if 'password' in data:
+            utilisateur.password = data['password']
+        if 'email' in data:
+            utilisateur.email = data['email']
+        if 'permissions' in data:
+            utilisateur.permissions = permissions.objects.get(id=data['permissions'])
+        if 'companies' in data:
+            utilisateur.companies = companies.objects.get(id=data['companies'])
         utilisateur.save()
         return Response("Success")
     if request.method == 'DELETE':
@@ -88,8 +95,10 @@ def ModAnn(request):
     if request.method == 'PUT':
         data = json.loads(request.body)
         annonce = advertisement.objects.get(id=data['id'])
-        annonce.title = data['title']
-        annonce.description = data['description']
+        if 'title' in data:
+            annonce.title = data['title']
+        if 'description' in data:
+            annonce.description = data['description']
         if 'cmp' in data:
             annonce.cmp = cmp.objects.get(id=data['cmp'])
         if 'companies' in data:
@@ -114,9 +123,12 @@ def ModJobApp(request):
             job_app.advert = companies.objects.get(id=data['advert'])
         if 'applicant' in data:
             job_app.applicant = companies.objects.get(id=data['applicant'])
-        job_app.surname = data['surname']
-        job_app.first_name = data['first_name']
-        job_app.email = data['email']
+        if 'surname' in data:
+            job_app.surname = data['surname']
+        if 'first_name' in data:
+            job_app.first_name = data['first_name']
+        if 'email' in data:
+            job_app.email = data['email']
         job_app.save()
         return Response("Success")
     if request.method == 'DELETE':
@@ -133,7 +145,8 @@ def ModComp(request):
     if request.method == 'PUT':
         data = json.loads(request.body)
         company = companies.objects.get(id=data['id'])
-        company.name = data['name']
+        if 'name' in data:
+            company.name = data['name']
         company.save()
         return Response("Success")
     if request.method == 'DELETE':
@@ -175,8 +188,14 @@ def AffichageMyAds(request):
 @api_view(['POST'])
 def AffichageJobApps(request):
     data = json.loads(request.body)
-    print(data)
     job_apps = JobApplication.objects.filter(advert=data['id'])
     print(job_apps)
     serializer = JobApplicationSerializer(job_apps, many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def AffichageInfos(request):
+    data = json.loads(request.body)
+    infos = cmp.objects.get(username=data['username'])
+    serializer = CmpSerializer(infos)
     return Response(serializer.data)

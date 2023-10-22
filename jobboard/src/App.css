@@ -157,6 +157,10 @@ body {
   background-color: green;
 }
 
+.btn1:hover {
+  background-color: aqua;
+}
+
 .btn2 {
   background-color: aqua;
 }

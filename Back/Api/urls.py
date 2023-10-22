@@ -13,5 +13,6 @@ urlpatterns = [
     path("delete_apply/<int:article_id>/", views.DeleteJobApply),
     path("myads", views.AffichageMyAds),
     path("myapps", views.AffichageJobApps),
+    path("myinfos", views.AffichageInfos),
     
 ]

@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 
 function Modify(props) {
 
+    const supprimerDonnees = () => {
+        localStorage.removeItem('username');
+        localStorage.removeItem('permissions');
+        window.location.reload();
+    }
+
     const handleSubmit = async (sub) => {
         sub.preventDefault();
 
@@ -19,7 +25,14 @@ function Modify(props) {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             } else {
-                alert("Update completed successfully, please reload to see the result")
+                if (props.reload === 'true') {
+                    alert("Update completed successfully, the page will reload to update")
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('permissions');
+                    window.location.reload();
+                } else {
+                    alert("Update completed successfully, please reload to see the result")
+                }
             }
 
             console.log(response);
@@ -43,7 +56,14 @@ function Modify(props) {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             } else {
-                alert("Deleted successfully, please reload to see the result")
+                if (props.reload === 'true') {
+                    alert("Deleted successfully, the page will reload to update")
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('permissions');
+                    window.location.reload();
+                } else {
+                    alert("Deleted successfully, please reload to see the result")
+                }
             }
 
             console.log(response);
@@ -63,15 +83,13 @@ function Modify(props) {
         <div className='modify'>
             {props.labels.map((lab,index) => (
                 <>
-                    <label id={index}>{lab}</label>
+                    <label id={index}>{lab}(optional)</label>
                     <input type="text" id={index} name={lab} value={formulaire[index]} onChange={(ev) => handleInputChange(lab, ev.target.value)} />
                 </>
             ))}
-            <input className='btn2' type="submit" onClick={handleSubmit} />
-            {permissions != '2' ? (
-              <button className='btn2' onClick={handledelete}>Delete</button>
-            ) : null}
-            <button className='btn2' onClick={props.fermer}>Back</button>
+            <input type="submit" onClick={handleSubmit} />
+            <button onClick={handledelete}>Delete</button>
+            <button onClick={props.fermer}>Back</button>
         </div>
     );
 }
