@@ -31,9 +31,9 @@ django.setup()
 from django.contrib.auth.models import User
 # Créez un super utilisateur
 User.objects.create_superuser(
-    username='Yolann',
+    username='ADMIN',
     email='victor.morellet@epitech.eu',
-    password='Ardwina29'
+    password='ADMIN31'
 )
 print(color + "Superuser created !")
 
