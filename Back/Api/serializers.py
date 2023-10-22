@@ -20,3 +20,11 @@ class CmpSerializer(serializers.ModelSerializer):
     class Meta:
         model = cmp
         fields = '__all__'
+
+class JobAppCustomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JobApplication
+        fields = '__all__'
+    
+    title = serializers.CharField()
+    company = serializers.CharField()

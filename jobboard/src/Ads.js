@@ -59,7 +59,6 @@ function Ads(props) {
                             <td className='btn2' onClick={() => handleClick1(index)}>Consult Job Application</td>
                             {displayJobApplication === index && <JobApplication parametre="myapps" donnee={{'id' : item.id}} fermer={() => setDisplayJobApplication(null)} />}
                             <td class="btn2" onClick={() => handleClick2(index)}>Modify/Delete</td>
-                            {console.log(item.id)}
                             {displayModify === index && <Modify table="modAnn" id={item.id} labels={["title","description"]} fermer={() => setDisplayModify(null)} />}
                         </tr>
                     ))

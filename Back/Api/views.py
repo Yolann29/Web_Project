@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from utilisateur.models import advertisement, JobApplication, companies, cmp, permissions
 from Api.serializers import AnnonceSerializer, CompaniesSerializer, JobApplicationSerializer, CmpSerializer
-from Api.serializers import AnnonceSerializer, CompaniesSerializer, JobApplicationSerializer
+from Api.serializers import AnnonceSerializer, CompaniesSerializer, JobApplicationSerializer, JobAppCustomSerializer
 import json
 
 
@@ -97,7 +97,6 @@ def ModAnn(request):
         annonce.save()
         return Response("Success")
     if request.method == 'DELETE':
-        print("ici")
         data = json.loads(request.body)
         annonce = advertisement.objects.get(id=data['id'])
         annonce.delete()
@@ -111,8 +110,10 @@ def ModJobApp(request):
     if request.method == 'PUT':
         data = json.loads(request.body)
         job_app = JobApplication.objects.get(id=data['id'])
-        job_app.advert = companies.objects.get(id=data['advert'])
-        job_app.applicant = companies.objects.get(id=data['applicant'])
+        if 'advert' in data:
+            job_app.advert = companies.objects.get(id=data['advert'])
+        if 'applicant' in data:
+            job_app.applicant = companies.objects.get(id=data['applicant'])
         job_app.surname = data['surname']
         job_app.first_name = data['first_name']
         job_app.email = data['email']
@@ -132,7 +133,6 @@ def ModComp(request):
     if request.method == 'PUT':
         data = json.loads(request.body)
         company = companies.objects.get(id=data['id'])
-        print(company)
         company.name = data['name']
         company.save()
         return Response("Success")
@@ -150,7 +150,11 @@ def GetJobApply(request):
     data = json.loads(request.body)
     cmpname = cmp.objects.get(username = data['applicant'])
     postulate = JobApplication.objects.filter(applicant=cmpname.id)
-    serializer = JobApplicationSerializer(postulate, many=True)
+    for pos in postulate:
+        pos.title = pos.advert.title
+        ad_comp = pos.advert.companies
+        pos.company = ad_comp.name
+    serializer = JobAppCustomSerializer(postulate, many=True)
     return Response(serializer.data)
 
 

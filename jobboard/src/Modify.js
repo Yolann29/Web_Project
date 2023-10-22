@@ -53,6 +53,7 @@ function Modify(props) {
     };
 
     const [formulaire, setFormulaire] = useState({'id' : props.id});
+    const permissions = localStorage.getItem('permissions');
 
     const handleInputChange = (lab, value) => {
         setFormulaire({ ...formulaire, [lab]: value });
@@ -61,14 +62,16 @@ function Modify(props) {
     return (
         <div className='modify'>
             {props.labels.map((lab,index) => (
-                <div key={index}>
+                <>
                     <label id={index}>{lab}</label>
                     <input type="text" id={index} name={lab} value={formulaire[index]} onChange={(ev) => handleInputChange(lab, ev.target.value)} />
-                </div>
+                </>
             ))}
-            <input type="submit" onClick={handleSubmit} />
-            <button onClick={handledelete}>Delete</button>
-            <button onClick={props.fermer}>Back</button>
+            <input className='btn2' type="submit" onClick={handleSubmit} />
+            {permissions != '2' ? (
+              <button className='btn2' onClick={handledelete}>Delete</button>
+            ) : null}
+            <button className='btn2' onClick={props.fermer}>Back</button>
         </div>
     );
 }

@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState , useEffect } from 'react';
+import Modify from "./Modify.js"
 
 function JobApplication(props) {
 
@@ -38,7 +39,7 @@ function JobApplication(props) {
         method: 'DELETE',
       })
     .then((response) => {
-      if (response.status === 204) {
+      if (response.status === 200) {
         console.log('Article supprimé avec succès');
         const updatedAnno = anno.filter(item => item.id !== articleId); // Créer une nouvelle liste sans l'article supprimé
         setAnno(updatedAnno); // Mettre à jour l'état
@@ -51,6 +52,12 @@ function JobApplication(props) {
     });
   };
 
+  const [displayModify, setDisplayModify] = useState(null);
+
+  const handleClick = (index) => {
+    setDisplayModify(index);
+  };
+
     return (
         <div className="JobApplication">
             <ul>
@@ -61,7 +68,13 @@ function JobApplication(props) {
                         <p>{item.first_name}</p>
                         <p>{item.email}</p>
                         {permissions === '2' ? (
-                          <button onClick={() => deleteApply(item.id)}>Delete</button>
+                          <>
+                            <p>{item.title}</p>
+                            <p>{item.company}</p>
+                            <button class="btn2" onClick={() => deleteApply(item.id)}>Delete</button>
+                            <button class="btn2" onClick={() => handleClick(index)}>Modify</button>
+                            {displayModify === index && <Modify table="modJobApp" id={item.id} labels={["surname","first_name","email"]} fermer={() => setDisplayModify(null)} />}
+                          </>
                         ) : null}
                     </li>
                 ))
