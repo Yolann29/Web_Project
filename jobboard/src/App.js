@@ -66,14 +66,14 @@ function App() {
   };
 
   const [activeSection, setActiveSection] = useState(0);
-  const [displayModAnn, setDisplayModAnn] = useState(null);
+  const [displayModify, setDisplayModify] = useState(null);
 
   const handleButton = (num) => {
     setActiveSection(num);
 };
 
 const handleClick = (index) => {
-  setDisplayModAnn(index);
+  setDisplayModify(index);
 };
 
   return (
@@ -118,6 +118,8 @@ const handleClick = (index) => {
                           <td>{item.email}</td>
                           <td>{item.permissions}</td>
                           <td>{item.companies}</td>
+                          <td class="btn2" onClick={() => handleClick(index)}>Modify/Delete</td>
+                          {displayModify === index && <Modify table="modUser" id={item.id} labels={["surname","first_name","username","password","email","permissions","companies"]} fermer={() => setDisplayModify(null)} />}
                         </tr>
                       ))}
                       </tbody>
@@ -142,6 +144,8 @@ const handleClick = (index) => {
                           <td>{item.description}</td>
                           <td>{item.cmp}</td>
                           <td>{item.companies}</td>
+                          <td class="btn2" onClick={() => handleClick(index)}>Modify/Delete</td>
+                          {displayModify === index && <Modify table="modAnn" id={item.id} labels={["title","description","cmp","companies"]} fermer={() => setDisplayModify(null)} />}
                         </tr>
                       ))}
                       </tbody>
@@ -168,8 +172,8 @@ const handleClick = (index) => {
                           <td>{item.surname}</td>
                           <td>{item.first_name}</td>
                           <td>{item.email}</td>
-                          <td class="btn2" onClick={() => handleClick(index)}>Modify</td>
-                          {displayModAnn === index && <Modify table="modJobApp" id={item.id} labels={["advert","applicant","surname","first_name","email"]} fermer={() => setDisplayModAnn(null)} />}
+                          <td class="btn2" onClick={() => handleClick(index)}>Modify/Delete</td>
+                          {displayModify === index && <Modify table="modJobApp" id={item.id} labels={["advert","applicant","surname","first_name","email"]} fermer={() => setDisplayModify(null)} />}
                         </tr>
                       ))}
                       </tbody>
@@ -188,6 +192,8 @@ const handleClick = (index) => {
                         <tr key={index}>
                           <td>{item.id}</td>
                           <td>{item.name}</td>
+                          <td class="btn2" onClick={() => handleClick(index)}>Modify/Delete</td>
+                          {displayModify === index && <Modify table="modComp" id={item.id} labels={["name"]} fermer={() => setDisplayModify(null)} />}
                         </tr>
                       ))}
                       </tbody>
